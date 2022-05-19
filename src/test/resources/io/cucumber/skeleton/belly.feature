@@ -24,7 +24,7 @@ Feature: Belly
     Then my belly should growl
 
 
-  Scenario: some a table of cakes
+  Scenario: some cakes on a table
     Given I have this cukes in my belly
       | CukeName    | Number |
       | baba        | 2      |
@@ -34,7 +34,7 @@ Feature: Belly
     When I wait 1 hours
     Then my belly should not growl
 
-  Scenario: some a table of cakes
+  Scenario: too much cakes on a table
     Given I have this cukes in my belly
       | CukeName    | Number |
       | baba        | 2      |
