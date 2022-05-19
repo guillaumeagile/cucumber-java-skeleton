@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.*;
 
 public class StepDefinitions {
     Belly belly;
-    @Given("I have {int} cukes in my belly")
+    @Given("I have {int} cuke(s) in my belly")
     public void iHaveCukes(int cukes) {
         this.belly = new Belly();
         this.belly.eat(cukes);
@@ -23,7 +23,7 @@ public class StepDefinitions {
         this.belly.waitX(hours);
     }
 
-    @When("I wait {int} hour")
+    @When("I wait {int} hour(s)")
     public void i_wait_hour(Integer hours) {
         this.belly.waitX(hours);
     }
