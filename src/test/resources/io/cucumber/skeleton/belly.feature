@@ -12,17 +12,17 @@ Feature: Belly
     Then my belly should not growl
 
 
-  Scenario: less cakes
+  Scenario: more cakes and more time
     Given I have 10 cukes in my belly
     When I wait 2 hour
     Then my belly should not growl
 
-  Scenario: some cakes and some times
+  Scenario: some cakes and not enough times
     Given I have 20 cukes in my belly
     When I wait 2 hour
     Then my belly should growl
 
-  Scenario: some cakes and some times
+  Scenario: some cakes and enough times
     Given I have 20 cukes in my belly
     When I wait 3 hour
     Then my belly should not growl
