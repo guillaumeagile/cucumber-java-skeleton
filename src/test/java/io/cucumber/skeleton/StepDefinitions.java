@@ -5,11 +5,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 import org.junit.jupiter.api.Test;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class StepDefinitions {
     Belly belly;
+
     @Given("I have {int} cuke(s) in my belly")
     public void iHaveCukes(int cukes) {
         this.belly = new Belly();
@@ -23,6 +25,15 @@ public class StepDefinitions {
         this.belly.waitX(hours);
     }
 
+    @Given("I have this cukes in my belly")
+    public void i_have_this_cukes_in_my_belly(io.cucumber.datatable.DataTable dataTable) {
+        this.belly = new Belly();
+        int cukes = dataTable.height() - 1;
+        for (int row = 1; row < dataTable.height() ; row++) {
+            this.belly.eat(Integer.parseInt(dataTable.cell(row, 1)));
+        }
+    }
+
     @When("I wait {int} hour(s)")
     public void i_wait_hour(Integer hours) {
         this.belly.waitX(hours);
@@ -30,17 +41,17 @@ public class StepDefinitions {
 
     @Then("my belly should growl")
     public void my_belly_should_growl() {
-        assertThat(  this.belly.isGrowling(), equalTo(true));
+        assertThat(this.belly.getCakes().toString(), this.belly.isGrowling(), equalTo(true));
     }
 
     @Then("my belly should not growl")
     public void my_belly_should_not_growl() {
-        assertThat(  this.belly.isGrowling(), equalTo(false));
+        assertThat(this.belly.getCakes().toString(), this.belly.isGrowling(), equalTo(false));
     }
 
     @Then("I take a coffee")
     public void i_take_a_coffee() {
-      assertThat(true, equalTo(false));
+        assertThat(true, equalTo(false));
 
     }
 }

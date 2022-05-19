@@ -23,7 +23,23 @@ Feature: Belly
     When I wait 2 hours
     Then my belly should growl
 
-  Scenario: some cakes and enough times
-    Given I have 20 cukes in my belly
-    When I wait 3 hours
+
+  Scenario: some a table of cakes
+    Given I have this cukes in my belly
+      | CukeName    | Number |
+      | baba        | 2      |
+      | forêt noire | 2      |
+      | petit lun   | 3      |
+      | banofee     | 2      |
+    When I wait 1 hours
     Then my belly should not growl
+
+  Scenario: some a table of cakes
+    Given I have this cukes in my belly
+      | CukeName    | Number |
+      | baba        | 2      |
+      | forêt noire | 2      |
+      | petit lun   | 3      |
+      | banofee     | 3     |
+    When I wait 1 hours
+    Then my belly should growl
