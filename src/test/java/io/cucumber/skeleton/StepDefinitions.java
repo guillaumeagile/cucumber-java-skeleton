@@ -16,11 +16,18 @@ public class StepDefinitions {
         this.belly.eat(cukes);
     }
 
+    @Given("I have {int} cukes in my belly and I wait {int} hour")
+    public void i_have_cukes_in_my_belly_and_i_wait_hour(Integer cukes, Integer hours) {
+        this.belly = new Belly();
+        this.belly.eat(cukes);
+        this.belly.waitX(hours);
+    }
+
     @When("I wait {int} hour")
     public void i_wait_hour(Integer hours) {
         this.belly.waitX(hours);
-
     }
+
     @Then("my belly should growl")
     public void my_belly_should_growl() {
         assertThat(  this.belly.isGrowling(), equalTo(true));
