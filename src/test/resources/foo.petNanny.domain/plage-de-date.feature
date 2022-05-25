@@ -2,14 +2,14 @@
 Fonctionnalité: verification des cas des chevauchement des plages de dates
 
   Scénario: la 1ere plage commence avant le 2e et se fini avant
-    Etant donné plusieurs plages de date
+    Etant donné ces plages de date
       | Debut      | Fin        |
       | 2021-12-25 | 2022-01-03 |
       | 2021-12-24 | 2022-01-01 |
     Alors les plages se chevauchent
 
   Scénario: la 1ere plage commence avant le 2e et se fini après
-    Etant donné plusieurs plages de date
+    Etant donné ces plages de date
       | Debut      | Fin        |
       | 2021-12-25 | 2022-01-03 |
       | 2021-12-24 | 2022-01-04 |
@@ -22,9 +22,14 @@ Fonctionnalité: verification des cas des chevauchement des plages de dates
       | 2021-12-25 | 2022-01-03 |
       | 2021-12-20 | 2021-12-23 |
       | 2000-01-01 | 2000-01-01 |
-    # analyse les 2 lignes qui correspondent, et créer 2 objets plage de date
-    Alors les plages ne se chevauchent pas
+     Alors les plages ne se chevauchent pas
 
+  Scénario: les plages sont disjointes après
+    Etant donné ces plages de date
+      | Debut      | Fin        |
+      | 2021-12-25 | 2022-01-03 |
+      | 2022-01-04 | 2022-01-11 |
+    Alors les plages ne se chevauchent pas
 
   Scénario: un exemple de données JSON
     Etant donné une plage de date en JSON
@@ -34,13 +39,4 @@ Fonctionnalité: verification des cas des chevauchement des plages de dates
     fin: '2022-01-03'
     }
     """
-    Alors les plages ne se chevauchent pas
-
-
-  Scénario: les plages sont disjointes après
-    Etant donné plusieurs plages de date
-      | Debut      | Fin        |
-      | 2021-12-25 | 2022-01-03 |
-      | 2022-01-04 | 2022-01-11 |
-    # analyse les 2 lignes qui correspondent, et créer 2 objets plage de date
     Alors les plages ne se chevauchent pas

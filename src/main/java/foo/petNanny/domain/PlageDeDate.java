@@ -41,4 +41,8 @@ public final class PlageDeDate {
                 "debut=" + debut + ", " +
                 "fin=" + fin + ']';
     }
+
+    public boolean estInclusDans(PlageDeDate plage2) {
+        return false;
+    }
 }

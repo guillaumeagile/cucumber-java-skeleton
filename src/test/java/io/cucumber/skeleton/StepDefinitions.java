@@ -5,7 +5,6 @@ import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 import io.cucumber.java.fr.Alors;
 import io.cucumber.java.fr.Etantdonné;
 
@@ -14,7 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 public class StepDefinitions {
     Belly belly;
@@ -37,7 +37,7 @@ public class StepDefinitions {
     public void i_have_this_cukes_in_my_belly(io.cucumber.datatable.DataTable dataTable) {
         this.belly = new Belly();
         int cukes = dataTable.height() - 1;
-        for (int row = 1; row < dataTable.height() ; row++) {
+        for (int row = 1; row < dataTable.height(); row++) {
             this.belly.eat(Integer.parseInt(dataTable.cell(row, 1)));
         }
     }
@@ -70,14 +70,25 @@ public class StepDefinitions {
                 LocalDate.parse(entry.get("Fin"))
         );
     }
+
     @Etantdonné("ces plages de date")
     public void ces_plages_de_date(List<PlageDeDate> plageDeDateList) {
-            this.plageDeDateList = plageDeDateList;
+        this.plageDeDateList = plageDeDateList;
     }
 
     @Alors("les plages ne se chevauchent pas")
     public void les_plages_ne_se_chevauchent_pas() {
-       var plage1 = this.plageDeDateList.get(0);
-       var plage2 = this.plageDeDateList.get( this.plageDeDateList.size()-1);
+        var plage1 = this.plageDeDateList.get(0);
+        var plage2 = this.plageDeDateList.get(this.plageDeDateList.size() - 1);
+
+        assertThat(plage1.estInclusDans(plage2), is(false));
+    }
+
+    @Alors("les plages se chevauchent")
+    public void les_plages_se_chevauchent() {
+        var plage1 = this.plageDeDateList.get(0);
+        var plage2 = this.plageDeDateList.get(this.plageDeDateList.size() - 1);
+
+        assertThat(plage1.estInclusDans(plage2), is(true));
     }
 }
