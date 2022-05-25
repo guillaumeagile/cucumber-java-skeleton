@@ -1,16 +1,24 @@
 package io.cucumber.skeleton;
 
+import foo.petNanny.domain.PlageDeDate;
+import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import org.junit.jupiter.api.Test;
+import io.cucumber.java.fr.Alors;
+import io.cucumber.java.fr.Etantdonné;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 public class StepDefinitions {
     Belly belly;
+    private List<PlageDeDate> plageDeDateList;
 
     @Given("I have {int} cuke(s) in my belly")
     public void iHaveCukes(int cukes) {
@@ -53,5 +61,23 @@ public class StepDefinitions {
     public void i_take_a_coffee() {
         assertThat(true, equalTo(false));
 
+    }
+
+    @DataTableType
+    public PlageDeDate plageDeDateFromDataDable(Map<String, String> entry) {
+        return new PlageDeDate(
+                LocalDate.parse(entry.get("Debut")),
+                LocalDate.parse(entry.get("Fin"))
+        );
+    }
+    @Etantdonné("ces plages de date")
+    public void ces_plages_de_date(List<PlageDeDate> plageDeDateList) {
+            this.plageDeDateList = plageDeDateList;
+    }
+
+    @Alors("les plages ne se chevauchent pas")
+    public void les_plages_ne_se_chevauchent_pas() {
+       var plage1 = this.plageDeDateList.get(0);
+       var plage2 = this.plageDeDateList.get( this.plageDeDateList.size()-1);
     }
 }
